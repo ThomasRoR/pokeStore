@@ -29,8 +29,16 @@ app.add_middleware(
 
 
 def load_env_file() -> None:
-    env_path = Path(__file__).parent / ".env"
-    if not env_path.exists():
+    # Try backend/.env first, then project root .env (two levels up when backend is a subfolder)
+    candidates = [Path(__file__).parent / ".env", Path(__file__).parent.parent / ".env", Path.cwd() / ".env"]
+
+    env_path = None
+    for cand in candidates:
+        if cand.exists():
+            env_path = cand
+            break
+
+    if env_path is None:
         return
 
     for raw_line in env_path.read_text(encoding="utf-8").splitlines():
