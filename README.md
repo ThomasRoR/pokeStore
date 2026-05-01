@@ -52,7 +52,7 @@ npm install
 npm run dev
 ```
 
-Acesse: http://localhost:3000 | API: http://localhost:8000
+Acesse: http://localhost:3000 | API: http://127.0.0.1:8000
 
 ## 🏗️ Arquitetura Backend (Refatorado)
 
